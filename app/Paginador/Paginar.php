@@ -11,6 +11,8 @@ include_once '../Piloto/Piloto.php';
 include_once '../Piloto/Consultas/Consultas_Pilotos.php';
 include_once '../Pago/Pago.php';
 include_once '../Pago/Consultas/Consultas_Pagos.php';
+include_once '../Turno/Turno.php';
+include_once '../Turno/Consultas/Consultas_Turnos.php';
 include_once '../config.php';
 Conexion::abrir_conexion();
 if (isset($_POST['metodo'])) {
@@ -30,37 +32,37 @@ if (isset($_POST['metodo'])) {
             $pam[] = $_POST['tipo_avion'];
         }
         if (isset($_POST['largo'])) {
-                    $largo = $_POST['largo'];
-                }
-                if (isset($_POST['pag'])) {
-                    $pag = $_POST['pag'];
-                }
-                if (isset($pag)) {
-                    $desde = ((int)$pag * (int)$largo + 1);
-                    $hasta = $desde + $largo - 1;
-                } else {
-                    $desde = 1;
-                    $hasta = $desde + $largo - 1;
-                }
-                $cantidad_reg = Consultas_Aviones::contRegistros(Conexion::getconexion(), $pam);
-                if($hasta>$cantidad_reg) {
-                    $hasta=$cantidad_reg;
-                }
-                $cantidad_most = ceil($cantidad_reg / $largo);
-                echo '<div class="col-sm-12 col-md-5">
+            $largo = $_POST['largo'];
+        }
+        if (isset($_POST['pag'])) {
+            $pag = $_POST['pag'];
+        }
+        if (isset($pag)) {
+            $desde = ((int) $pag * (int) $largo + 1);
+            $hasta = $desde + $largo - 1;
+        } else {
+            $desde = 1;
+            $hasta = $desde + $largo - 1;
+        }
+        $cantidad_reg = Consultas_Aviones::contRegistros(Conexion::getconexion(), $pam);
+        if ($hasta > $cantidad_reg) {
+            $hasta = $cantidad_reg;
+        }
+        $cantidad_most = ceil($cantidad_reg / $largo);
+        echo '<div class="col-sm-12 col-md-5">
                                 <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Mostrando de a ' . $largo . ' registros, desde ' . $desde . ' hasta ' . $hasta . ',del total de ' . $cantidad_reg . ' registros</div>
                             </div>';
-                echo '<div class="col-sm-12 col-md-7">';
-                echo '<nav aria-label="Page navigation example">';
-                echo '<ul class="pagination">';
-                echo '<li class="page-item"><button class="page-link" type="submit" onclick="return paganterior();">Anterior</button></li>';
-                for ($index = 0; $index < $cantidad_most; $index++) {
-                    echo '<li class="page-item"><button class="page-link" type="submit" value=' . $index . ' onclick="return cambiar(' . $index . ');">' . ($index + 1) . '</button></li>';
-                }
-                echo '<li class="page-item"><button class="page-link" type="submit" onclick="return pagsiguiente(' . $cantidad_most . ');">Siguiente</button></li>';
-                echo '</ul>';
-                echo '</nav>';
-                echo '</div>';
+        echo '<div class="col-sm-12 col-md-7">';
+        echo '<nav aria-label="Page navigation example">';
+        echo '<ul class="pagination">';
+        echo '<li class="page-item"><button class="page-link" type="submit" onclick="return paganterior();">Anterior</button></li>';
+        for ($index = 0; $index < $cantidad_most; $index++) {
+            echo '<li class="page-item"><button class="page-link" type="submit" value=' . $index . ' onclick="return cambiar(' . $index . ');">' . ($index + 1) . '</button></li>';
+        }
+        echo '<li class="page-item"><button class="page-link" type="submit" onclick="return pagsiguiente(' . $cantidad_most . ');">Siguiente</button></li>';
+        echo '</ul>';
+        echo '</nav>';
+        echo '</div>';
     } else {
         if ($metodo == 'TipoAvion') {
             $pam = array();
@@ -71,37 +73,37 @@ if (isset($_POST['metodo'])) {
                 $pam[] = $_POST['precio_tipo_avion'];
             }
             if (isset($_POST['largo'])) {
-                    $largo = $_POST['largo'];
-                }
-                if (isset($_POST['pag'])) {
-                    $pag = $_POST['pag'];
-                }
-                if (isset($pag)) {
-                    $desde = ((int)$pag * (int)$largo + 1);
-                    $hasta = $desde + $largo - 1;
-                } else {
-                    $desde = 1;
-                    $hasta = $desde + $largo - 1;
-                }
-                $cantidad_reg = Consultas_Tipos_Aviones::contRegistros(Conexion::getconexion(), $pam);
-                if($hasta>$cantidad_reg) {
-                    $hasta=$cantidad_reg;
-                }
-                $cantidad_most = ceil($cantidad_reg / $largo);
-                echo '<div class="col-sm-12 col-md-5">
+                $largo = $_POST['largo'];
+            }
+            if (isset($_POST['pag'])) {
+                $pag = $_POST['pag'];
+            }
+            if (isset($pag)) {
+                $desde = ((int) $pag * (int) $largo + 1);
+                $hasta = $desde + $largo - 1;
+            } else {
+                $desde = 1;
+                $hasta = $desde + $largo - 1;
+            }
+            $cantidad_reg = Consultas_Tipos_Aviones::contRegistros(Conexion::getconexion(), $pam);
+            if ($hasta > $cantidad_reg) {
+                $hasta = $cantidad_reg;
+            }
+            $cantidad_most = ceil($cantidad_reg / $largo);
+            echo '<div class="col-sm-12 col-md-5">
                                 <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Mostrando de a ' . $largo . ' registros, desde ' . $desde . ' hasta ' . $hasta . ',del total de ' . $cantidad_reg . ' registros</div>
                             </div>';
-                echo '<div class="col-sm-12 col-md-7">';
-                echo '<nav aria-label="Page navigation example">';
-                echo '<ul class="pagination">';
-                echo '<li class="page-item"><button class="page-link" type="submit" onclick="return paganterior();">Anterior</button></li>';
-                for ($index = 0; $index < $cantidad_most; $index++) {
-                    echo '<li class="page-item"><button class="page-link" type="submit" value=' . $index . ' onclick="return cambiar(' . $index . ');">' . ($index + 1) . '</button></li>';
-                }
-                echo '<li class="page-item"><button class="page-link" type="submit" onclick="return pagsiguiente(' . $cantidad_most . ');">Siguiente</button></li>';
-                echo '</ul>';
-                echo '</nav>';
-                echo '</div>';
+            echo '<div class="col-sm-12 col-md-7">';
+            echo '<nav aria-label="Page navigation example">';
+            echo '<ul class="pagination">';
+            echo '<li class="page-item"><button class="page-link" type="submit" onclick="return paganterior();">Anterior</button></li>';
+            for ($index = 0; $index < $cantidad_most; $index++) {
+                echo '<li class="page-item"><button class="page-link" type="submit" value=' . $index . ' onclick="return cambiar(' . $index . ');">' . ($index + 1) . '</button></li>';
+            }
+            echo '<li class="page-item"><button class="page-link" type="submit" onclick="return pagsiguiente(' . $cantidad_most . ');">Siguiente</button></li>';
+            echo '</ul>';
+            echo '</nav>';
+            echo '</div>';
         } else {
             if ($metodo == 'Vuelo') {
                 $pam = array();
@@ -139,15 +141,15 @@ if (isset($_POST['metodo'])) {
                     $pag = $_POST['pag'];
                 }
                 if (isset($pag)) {
-                    $desde = ((int)$pag * (int)$largo + 1);
+                    $desde = ((int) $pag * (int) $largo + 1);
                     $hasta = $desde + $largo - 1;
                 } else {
                     $desde = 1;
                     $hasta = $desde + $largo - 1;
                 }
                 $cantidad_reg = Consultas_Vuelos::contRegistros(Conexion::getconexion(), $pam);
-                if($hasta>$cantidad_reg) {
-                    $hasta=$cantidad_reg;
+                if ($hasta > $cantidad_reg) {
+                    $hasta = $cantidad_reg;
                 }
                 $cantidad_most = ceil($cantidad_reg / $largo);
                 echo '<div class="col-sm-12 col-md-5">
@@ -186,37 +188,37 @@ if (isset($_POST['metodo'])) {
                         $pam[] = $_POST['deuda_piloto'];
                     }
                     if (isset($_POST['largo'])) {
-                    $largo = $_POST['largo'];
-                }
-                if (isset($_POST['pag'])) {
-                    $pag = $_POST['pag'];
-                }
-                if (isset($pag)) {
-                    $desde = ((int)$pag * (int)$largo + 1);
-                    $hasta = $desde + $largo - 1;
-                } else {
-                    $desde = 1;
-                    $hasta = $desde + $largo - 1;
-                }
-                $cantidad_reg = Consultas_Pilotos::contRegistros(Conexion::getconexion(), $pam);
-                if($hasta>$cantidad_reg) {
-                    $hasta=$cantidad_reg;
-                }
-                $cantidad_most = ceil($cantidad_reg / $largo);
-                echo '<div class="col-sm-12 col-md-5">
+                        $largo = $_POST['largo'];
+                    }
+                    if (isset($_POST['pag'])) {
+                        $pag = $_POST['pag'];
+                    }
+                    if (isset($pag)) {
+                        $desde = ((int) $pag * (int) $largo + 1);
+                        $hasta = $desde + $largo - 1;
+                    } else {
+                        $desde = 1;
+                        $hasta = $desde + $largo - 1;
+                    }
+                    $cantidad_reg = Consultas_Pilotos::contRegistros(Conexion::getconexion(), $pam);
+                    if ($hasta > $cantidad_reg) {
+                        $hasta = $cantidad_reg;
+                    }
+                    $cantidad_most = ceil($cantidad_reg / $largo);
+                    echo '<div class="col-sm-12 col-md-5">
                                 <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Mostrando de a ' . $largo . ' registros, desde ' . $desde . ' hasta ' . $hasta . ',del total de ' . $cantidad_reg . ' registros</div>
                             </div>';
-                echo '<div class="col-sm-12 col-md-7">';
-                echo '<nav aria-label="Page navigation example">';
-                echo '<ul class="pagination">';
-                echo '<li class="page-item"><button class="page-link" type="submit" onclick="return paganterior();">Anterior</button></li>';
-                for ($index = 0; $index < $cantidad_most; $index++) {
-                    echo '<li class="page-item"><button class="page-link" type="submit" value=' . $index . ' onclick="return cambiar(' . $index . ');">' . ($index + 1) . '</button></li>';
-                }
-                echo '<li class="page-item"><button class="page-link" type="submit" onclick="return pagsiguiente(' . $cantidad_most . ');">Siguiente</button></li>';
-                echo '</ul>';
-                echo '</nav>';
-                echo '</div>';
+                    echo '<div class="col-sm-12 col-md-7">';
+                    echo '<nav aria-label="Page navigation example">';
+                    echo '<ul class="pagination">';
+                    echo '<li class="page-item"><button class="page-link" type="submit" onclick="return paganterior();">Anterior</button></li>';
+                    for ($index = 0; $index < $cantidad_most; $index++) {
+                        echo '<li class="page-item"><button class="page-link" type="submit" value=' . $index . ' onclick="return cambiar(' . $index . ');">' . ($index + 1) . '</button></li>';
+                    }
+                    echo '<li class="page-item"><button class="page-link" type="submit" onclick="return pagsiguiente(' . $cantidad_most . ');">Siguiente</button></li>';
+                    echo '</ul>';
+                    echo '</nav>';
+                    echo '</div>';
                 } else {
                     if ($metodo == 'Pago') {
                         $pam = array();
@@ -230,37 +232,108 @@ if (isset($_POST['metodo'])) {
                             $pam[] = $_POST['fecha_pago'];
                         }
                         if (isset($_POST['largo'])) {
-                    $largo = $_POST['largo'];
-                }
-                if (isset($_POST['pag'])) {
-                    $pag = $_POST['pag'];
-                }
-                if (isset($pag)) {
-                    $desde = ((int)$pag * (int)$largo + 1);
-                    $hasta = $desde + $largo - 1;
-                } else {
-                    $desde = 1;
-                    $hasta = $desde + $largo - 1;
-                }
-                $cantidad_reg = Consultas_Pagos::contRegistros(Conexion::getconexion(), $pam);
-                if($hasta>$cantidad_reg) {
-                    $hasta=$cantidad_reg;
-                }
-                $cantidad_most = ceil($cantidad_reg / $largo);
-                echo '<div class="col-sm-12 col-md-5">
+                            $largo = $_POST['largo'];
+                        }
+                        if (isset($_POST['pag'])) {
+                            $pag = $_POST['pag'];
+                        }
+                        if (isset($pag)) {
+                            $desde = ((int) $pag * (int) $largo + 1);
+                            $hasta = $desde + $largo - 1;
+                        } else {
+                            $desde = 1;
+                            $hasta = $desde + $largo - 1;
+                        }
+                        $cantidad_reg = Consultas_Pagos::contRegistros(Conexion::getconexion(), $pam);
+                        if ($hasta > $cantidad_reg) {
+                            $hasta = $cantidad_reg;
+                        }
+                        $cantidad_most = ceil($cantidad_reg / $largo);
+                        echo '<div class="col-sm-12 col-md-5">
                                 <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Mostrando de a ' . $largo . ' registros, desde ' . $desde . ' hasta ' . $hasta . ',del total de ' . $cantidad_reg . ' registros</div>
                             </div>';
-                echo '<div class="col-sm-12 col-md-7">';
-                echo '<nav aria-label="Page navigation example">';
-                echo '<ul class="pagination">';
-                echo '<li class="page-item"><button class="page-link" type="submit" onclick="return paganterior();">Anterior</button></li>';
-                for ($index = 0; $index < $cantidad_most; $index++) {
-                    echo '<li class="page-item"><button class="page-link" type="submit" value=' . $index . ' onclick="return cambiar(' . $index . ');">' . ($index + 1) . '</button></li>';
-                }
-                echo '<li class="page-item"><button class="page-link" type="submit" onclick="return pagsiguiente(' . $cantidad_most . ');">Siguiente</button></li>';
-                echo '</ul>';
-                echo '</nav>';
-                echo '</div>';
+                        echo '<div class="col-sm-12 col-md-7">';
+                        echo '<nav aria-label="Page navigation example">';
+                        echo '<ul class="pagination">';
+                        echo '<li class="page-item"><button class="page-link" type="submit" onclick="return paganterior();">Anterior</button></li>';
+                        for ($index = 0; $index < $cantidad_most; $index++) {
+                            echo '<li class="page-item"><button class="page-link" type="submit" value=' . $index . ' onclick="return cambiar(' . $index . ');">' . ($index + 1) . '</button></li>';
+                        }
+                        echo '<li class="page-item"><button class="page-link" type="submit" onclick="return pagsiguiente(' . $cantidad_most . ');">Siguiente</button></li>';
+                        echo '</ul>';
+                        echo '</nav>';
+                        echo '</div>';
+                    } else {
+                        if ($metodo == 'Turno') {
+                            $pam = array();
+                            if (isset($_POST['piloto_turno'])) {
+                                $pam[] = $_POST['piloto_turno'];
+                            }
+                            if (isset($_POST['copiloto_turno'])) {
+                                $pam[] = $_POST['copiloto_turno'];
+                            }
+                            if (isset($_POST['fecha_turno'])) {
+                                $pam[] = $_POST['fecha_turno'];
+                            }
+                            if (isset($_POST['salida_turno'])) {
+                                $pam[] = $_POST['salida_turno'];
+                            }
+                            if (isset($_POST['llegada_turno'])) {
+                                $pam[] = $_POST['llegada_turno'];
+                            }
+                            if (isset($_POST['avion_turno'])) {
+                                $pam[] = $_POST['avion_turno'];
+                            }
+                            if (isset($_POST['aclaracion_turno'])) {
+                                $pam[] = $_POST['aclaracion_turno'];
+                            }
+                            if (isset($_POST['largo'])) {
+                                $largo = $_POST['largo'];
+                            }
+                            if (isset($_POST['pag'])) {
+                                $pag = $_POST['pag'];
+                            }
+                            if (isset($_POST['turnometodo'])) {
+                                $turnometodo = $_POST['turnometodo'];
+                            }
+                            if ($turnometodo == 0) {
+                                $pam[7] = 0;
+                            } else {
+                                if ($turnometodo == 1) {
+                                    $pam[7] = 1;
+                                } else {
+                                    if ($turnometodo == 2) {
+                                        $pam[7] = 2;
+                                    }
+                                }
+                            }
+                            if (isset($pag)) {
+                                $desde = ((int) $pag * (int) $largo + 1);
+                                $hasta = $desde + $largo - 1;
+                            } else {
+                                $desde = 1;
+                                $hasta = $desde + $largo - 1;
+                            }
+                            $cantidad_reg = Consultas_Turnos::contRegistros(Conexion::getconexion(), $pam);
+                            if ($hasta > $cantidad_reg) {
+                                $hasta = $cantidad_reg;
+                            }
+                            $cantidad_most = ceil($cantidad_reg / $largo);
+                            echo '<div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Mostrando de a ' . $largo . ' registros, desde ' . $desde . ' hasta ' . $hasta . ',del total de ' . $cantidad_reg . ' registros</div>
+                            </div>';
+                            echo '<div class="col-sm-12 col-md-7">';
+                            echo '<nav aria-label="Page navigation example">';
+                            echo '<ul class="pagination">';
+                            echo '<li class="page-item"><button class="page-link" type="submit" onclick="return paganterior();">Anterior</button></li>';
+                            for ($index = 0; $index < $cantidad_most; $index++) {
+                                echo '<li class="page-item"><button class="page-link" type="submit" value=' . $index . ' onclick="return cambiar(' . $index . ');">' . ($index + 1) . '</button></li>';
+                            }
+                            echo '<li class="page-item"><button class="page-link" type="submit" onclick="return pagsiguiente(' . $cantidad_most . ');">Siguiente</button></li>';
+                            echo '</ul>';
+                            echo '</nav>';
+                            echo '</div>';
+                        }
                     }
                 }
             }

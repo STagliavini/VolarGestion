@@ -243,6 +243,12 @@
                                     <p>Pagos</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="Turno.php">
+                                    <i class="fas fa-bell"></i>
+                                    <p>Turno</p>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -25,10 +25,10 @@
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/atlantis.min.css">
         <!-- CSS Just for demo purpose, don't include it in your project -->
-        <link rel="stylesheet" href="assets/css/demo.css"><link rel="stylesheet" href="assets/css/demo.css">
+        <link rel="stylesheet" href="assets/css/demo.css">
     </head>
     <body>
-        <?php
+    <?php
         include_once 'app/Usuario/Consultas/Consultas_Usuarios.php';
         include_once 'app/Usuario/Usuario.php';
         include_once 'app/Piloto/Consultas/Consultas_Pilotos.php';
@@ -38,10 +38,11 @@
         include_once 'app/config.php';
         include_once 'app/Redireccion/Redireccion.inc.php';
         Conexion::abrir_conexion();
-        if (ControlSesion::sesion_iniciada()) {
-            $usuario = Consultas_Usuarios::buscarporNombre(Conexion::getconexion(), $_SESSION['nombre_usuario']);
-            $piloto = Consultas_Pilotos::buscarporDni(Conexion::getconexion(), $_SESSION['nombre_usuario']);
-        } else {
+        if(ControlSesion::sesion_iniciada()){
+            $usuario=Consultas_Usuarios::buscarporNombre(Conexion::getconexion(), $_SESSION['nombre_usuario']);
+            $piloto=Consultas_Pilotos::buscarporDni(Conexion::getconexion(), $_SESSION['nombre_usuario']);
+        }
+        else{
             Redireccion::redirigir(RUTA_HOME);
         }
         Conexion::cerrar_conexion();
@@ -50,7 +51,8 @@
             <div class="main-header">
                 <!-- Logo Header -->
                 <div class="logo-header" data-background-color="blue">
-                    <a href="Avion.php" class="logo">
+
+                    <a href="Piloto.php" class="logo">
                         <img src="logos/logo-mac.jpg" alt="navbar brand" class="navbar-brand" height="100%" width="100%">
                     </a>
                     <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +73,7 @@
                 <nav class="navbar navbar-header navbar-expand-lg" data-background-color="blue2">
 
                     <div class="container-fluid">
-
+                        
                         <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                             <li class="nav-item toggle-nav-search hidden-caret">
                                 <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
@@ -134,35 +136,17 @@
                             <li class="nav-item dropdown hidden-caret">
                                 <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                                     <div class="avatar-sm">
-                                        <img src="<?php
-                                        if ($usuario[0]->getPerfil_Usuario() != 'recursos/fotos_usuarios/') {
-                                            echo $usuario[0]->getPerfil_Usuario();
-                                        } else {
-                                            echo 'recursos/fotos_usuarios/desconocido.jpg';
-                                        }
-                                        ?>" alt="..." class="avatar-img rounded-circle">
+                                        <img src="<?php if($usuario[0]->getPerfil_Usuario()!='recursos/fotos_usuarios/'&&$usuario[0]->getPerfil_Usuario()!=''){echo $usuario[0]->getPerfil_Usuario();}else{echo 'recursos/fotos_usuarios/desconocido.jpg';} ?>" alt="..." class="avatar-img rounded-circle">
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user animated fadeIn">
                                     <div class="dropdown-user-scroll scrollbar-outer">
                                         <li>
                                             <div class="user-box">
-                                                <div class="avatar-lg"><img src="<?php
-                                                    if ($usuario[0]->getPerfil_Usuario() != 'recursos/fotos_usuarios/') {
-                                                        echo $usuario[0]->getPerfil_Usuario();
-                                                    } else {
-                                                        echo 'recursos/fotos_usuarios/desconocido.jpg';
-                                                    }
-                                                    ?>" alt="image profile" class="avatar-img rounded"></div>
+                                                <div class="avatar-lg"><img src="<?php if($usuario[0]->getPerfil_Usuario()!='recursos/fotos_usuarios/'&&$usuario[0]->getPerfil_Usuario()!=''){echo $usuario[0]->getPerfil_Usuario();}else{echo 'recursos/fotos_usuarios/desconocido.jpg';} ?>" alt="image profile" class="avatar-img rounded"></div>
                                                 <div class="u-text">
                                                     <h4><?php echo $usuario[1]; ?></h4>
-                                                    <p class="text-muted"><?php
-                                                        if ($piloto->getMail_piloto() != '') {
-                                                            echo $piloto->getMail_piloto();
-                                                        } else {
-                                                            echo 'No existe e-mail';
-                                                        }
-                                                        ?></p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">Mi Perfil</a>
+                                                    <p class="text-muted"><?php if($piloto->getMail_piloto()!=''){echo $piloto->getMail_piloto();}else{echo 'No existe e-mail';} ?></p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">Mi Perfil</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -182,17 +166,12 @@
             </div>
             <!-- Sidebar -->
             <div class="sidebar sidebar-style-2">
+
                 <div class="sidebar-wrapper scrollbar scrollbar-inner">
                     <div class="sidebar-content">
                         <div class="user">
                             <div class="avatar-sm float-left mr-2">
-                                <img src="<?php
-                                if ($usuario[0]->getPerfil_Usuario() != 'recursos/fotos_usuarios/' && $usuario[0]->getPerfil_Usuario() != '') {
-                                    echo $usuario[0]->getPerfil_Usuario();
-                                } else {
-                                    echo 'recursos/fotos_usuarios/desconocido.jpg';
-                                }
-                                ?>" alt="..." class="avatar-img rounded-circle">
+                                <img src="<?php if($usuario[0]->getPerfil_Usuario()!='recursos/fotos_usuarios/'&&$usuario[0]->getPerfil_Usuario()!=''){echo $usuario[0]->getPerfil_Usuario();}else{echo 'recursos/fotos_usuarios/desconocido.jpg';} ?>" alt="..." class="avatar-img rounded-circle">
                             </div>
                             <div class="info">
                                 <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -203,6 +182,7 @@
                                     </span>
                                 </a>
                                 <div class="clearfix"></div>
+
                                 <div class="collapse in" id="collapseExample">
                                     <ul class="nav">
                                         <li>
@@ -265,8 +245,8 @@
                             </li>
                             <li class="nav-item">
                                 <a href="Turno.php">
-                                    <i class="fas fa-bell"></i>
-                                    <p>Turno</p>
+                                    <i class="fas fa-money-bill"></i>
+                                    <p>Turnos</p>
                                 </a>
                             </li>
                         </ul>
@@ -276,49 +256,114 @@
             <div class="main-panel">
                 <div class="content">
                     <div class="page-inner">
-
+                        
                         <div class="row">
                             <div class="col-sm-12 col-md-8">
-                                <h3><b>FORMULARIO AVIONES</b></h3>
-                                <p class="mb-30 mr-100 mr-sm-0">Ingrese los datos de los aviones</p>
-                                <form class="form-block form-bold form-mb-20 form-h-35 form-brdr-b-grey pr-50 pr-sm-0" method="POST" id="formu">
+                        <h3><b>FORMULARIO TURNOS</b></h3>
+                        <p class="mb-30 mr-100 mr-sm-0">Reserve su Turno</p>
+                        <form class="form-block form-bold form-mb-20 form-h-35 form-brdr-b-grey pr-50 pr-sm-0" method="POST" id="formu">
 
-                                </form>
-                                <br>
-                                <div class="row">
+                        </form>
+                        <br>
+                        <h3><b>PENDIENTES DE CONFIRMACION</b></h3>
+                        <div class="row">
                                     <div class="col-sm-12 col-md-6">
-                                        <label>Mostrar<select name="largo" id="largo" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="100" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
+                                        <label>Mostrar<select name="largo" id="largo" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="10" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
                                     </div>
                                 </div>
-                                <table class="table">
-                                    <thead>
-                                    <th>Matricula</th>
-                                    <th>Nombre</th>
-                                    <th>Descripcion</th>
-                                    <th>Tipo</th>
-                                    <th>Acciones</th>
-                                    </thead>
-                                    <tbody id="datosaviones">
+                        <br>
+                        <table class="table table-responsive">
+                            <thead>
+                            <th>Piloto</th>
+                            <th>Copiloto</th>
+                            <th>Fecha</th>
+                            <th>Salida</th>
+                            <th>Llegada</th>
+                            <th>Avion</th>
+                            <th>Aclaracion</th>
+                            </thead>
+                            <tbody id="datosturnospendientes">
 
-                                    </tbody>
-                                </table>
-                                <input type="hidden" id='actualpage' value='0'/>
-                            </div><!-- col-md-6 -->
+                            </tbody>
+                        </table>
+                        <input type="hidden" id='actualpage' value='0'/>
+                        
+                    </div><!-- col-md-6 -->
+                    
+                    <div class="col-sm-12 col-md-4">
+                        <h3 class="mb-20 mt-sm-50"><b>INFORMACION DE CAMPOS</b></h3>
 
-                            <div class="col-sm-12 col-md-4">
-                                <h3 class="mb-20 mt-sm-50"><b>INFORMACION DE CAMPOS</b></h3>
-
-                                <ul class="font-11 list-relative list-li-pl-30 list-block list-li-mb-15">
-                                    <li><i class="abs-tl ion-android-add-circle"></i>Codigo: numerico, maximo de 11 digitos no vacio.</li>
-                                    <li><i class="abs-tl ion-android-add-circle"></i>Nombre: numerico, maximo de 100 digitos.</li>
-                                    <li><i class="abs-tl ion-android-add-circle"></i>Descripcion: texto, maximo de 30 caracteres.</li>
-                                </ul>
-                            </div><!-- col-md-6 -->
-                        </div>
-                        <div class="row" id="paginador">
+                        <ul class="font-11 list-relative list-li-pl-30 list-block list-li-mb-15">
+                            <li><i class="abs-tl ion-android-add-circle"></i>Codigo: numerico, maximo de 11 digitos no vacio.</li>
+                            <li><i class="abs-tl ion-android-add-circle"></i>Nombre: numerico, maximo de 100 digitos.</li>
+                            <li><i class="abs-tl ion-android-add-circle"></i>Descripcion: texto, maximo de 30 caracteres.</li>
+                        </ul>
+                    </div><!-- col-md-6 -->
+                    <div class="row" id="paginador0">
                             
                         </div>
-                        <div class="row" id="pag">
+                        <div class="row" id="pag0">
+                            
+                        </div>
+                    <div class="col-sm-12 col-md-8">
+                        <h3><b>CONFIRMADOS</b></h3>
+                        <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <label>Mostrar<select name="largo" id="largo" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="10" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
+                                    </div>
+                                </div>
+                        <br>
+                        <table class="table table-responsive">
+                            <thead>
+                            <th>Piloto</th>
+                            <th>Copiloto</th>
+                            <th>Fecha</th>
+                            <th>Salida</th>
+                            <th>Llegada</th>
+                            <th>Avion</th>
+                            <th>Aclaracion</th>
+                            </thead>
+                            <tbody id="datosturnosconfirmados">
+
+                            </tbody>
+                        </table>
+                        <input type="hidden" id='actualpage' value='0'/>
+                    </div><!-- col-md-6 -->
+                    <div class="row" id="paginador1">
+                            
+                        </div>
+                        <div class="row" id="pag1">
+                            
+                        </div>
+                    <div class="col-sm-12 col-md-8">
+                        <h3><b>CANCELADOS</b></h3>
+                        <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <label>Mostrar<select name="largo" id="largo" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="10" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
+                                    </div>
+                                </div>
+                        <br>
+                        <table class="table table-responsive">
+                            <thead>
+                            <th>Piloto</th>
+                            <th>Copiloto</th>
+                            <th>Fecha</th>
+                            <th>Salida</th>
+                            <th>Llegada</th>
+                            <th>Avion</th>
+                            <th>Aclaracion</th>
+                            </thead>
+                            <tbody id="datosturnoscancelados">
+
+                            </tbody>
+                        </table>
+                        <input type="hidden" id='actualpage' value='0'/>
+                    </div><!-- col-md-6 -->
+                    </div>
+                        <div class="row" id="paginador2">
+                            
+                        </div>
+                        <div class="row" id="pag2">
                             
                         </div>
                     </div>
@@ -412,11 +457,15 @@
         <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
         <!-- Atlantis JS -->
         <script src="assets/js/atlantis.min.js"></script>
+        <script src="assets/js/plugin/responsive-paginate.js"></script>
         <script>
             $(document).ready(function () {
-                $('#formu').load('vistas/Formu_Avion/formu_avion.php');
-                $('#datosaviones').load('app/Avion/AJAX/listadoAviones.php');
-                paginar();
+                $('#formu').load('vistas/Formu_Turno/formu_turno.php');
+                $('#datosturnospendientes').load('app/Turno/AJAX/listadoTurnosPendientes.php');
+                $('#datosturnosconfirmados').load('app/Turno/AJAX/listadoTurnosConfirmados.php');
+                $('#datosturnoscancelados').load('app/Turno/AJAX/listadoTurnosCancelados.php');
+                paginar(0);
+                $(".pagination").rPage();
             });
             function paginar(pagina) {
                 var modobusc = $('input[id="modbusc"]:checked').length;
@@ -424,7 +473,7 @@
                     $.ajax({
                         url: "app/Paginador/Paginar.php",
                         type: 'POST',
-                        data: "matricula_avion=" + document.getElementById("matricula_avion").value + "&nombre_avion=" + document.getElementById("nombre_avion").value + "&descripcion_avion=" + document.getElementById("descripcion_avion").value + "&tipo_avion=" + document.getElementById("tipo_avion").value + "&metodo=Avion"+"&largo="+document.getElementById("largo").value+"&pag="+pagina,
+                        data: "dni_pago=" + document.getElementById("dni_pago").value + "&monto_pago=" + document.getElementById("monto_pago").value+"&fecha_pago=" + document.getElementById("fecha_pago").value+"&metodo=Pago"+"&largo="+document.getElementById("largo").value+"&pag="+pagina,
                         success: function (res) {
                             $('#paginador').html(res);
                         }
@@ -434,34 +483,69 @@
                     $.ajax({
                         url: "app/Paginador/Paginar.php",
                         type: 'POST',
-                        data: "metodo=Avion"+"&largo="+document.getElementById("largo").value+"&pag="+pagina,
+                        data: "turnometodo=0&metodo=Turno"+"&largo="+document.getElementById("largo").value+"&pag="+pagina,
                         success: function (res) {
-                            $('#paginador').html(res);
+                            $('#paginador0').html(res);
+                        }
+                    });
+                    $.ajax({
+                        url: "app/Paginador/Paginar.php",
+                        type: 'POST',
+                        data: "turnometodo=1&metodo=Turno"+"&largo="+document.getElementById("largo").value+"&pag="+pagina,
+                        success: function (res) {
+                            $('#paginador1').html(res);
+                        }
+                    });
+                    $.ajax({
+                        url: "app/Paginador/Paginar.php",
+                        type: 'POST',
+                        data: "turnometodo=2&metodo=Turno"+"&largo="+document.getElementById("largo").value+"&pag="+pagina,
+                        success: function (res) {
+                            $('#paginador2').html(res);
                         }
                     });
                     return false;
                 }
             }
-            function verificar(id_avion) {
+            function verificar(id_pago) {
                 $.ajax({
-                    url: "app/Avion/AJAX/modificarAvion.php",
+                    url: "app/Pago/AJAX/modificarPago.php",
                     type: 'POST',
-                    data: "id_avion=" + id_avion,
+                    data: "id_pago=" + id_pago,
                     success: function (res) {
                         $('#formu').html(res);
                     }
                 });
                 return false;
             }
-            function eliminar(id_avion) {
-                if (confirm('Desea confirmar el borrado del avion?')) {
+            function confirmarr(id_turno) {
+                if (confirm('Desea confirmar el turno?')) {
                     $.ajax({
-                        url: "app/Avion/AJAX/borrarAvion.php",
+                        url: "app/Turno/AJAX/confirmarTurno.php",
                         type: 'POST',
-                        data: "id_avion=" + id_avion,
+                        data: "id_turno=" + id_turno,
+                        success: function () {
+                            $('#datosturnospendientes').load('app/Turno/AJAX/listadoTurnosPendientes.php');
+                            $('#datosturnosconfirmados').load('app/Turno/AJAX/listadoTurnosConfirmados.php');
+                            $('#datosturnoscancelados').load('app/Turno/AJAX/listadoTurnosCancelados.php');
+                            paginar(0);
+                        }
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+            }
+            function eliminar(id_turno) {
+                if (confirm('Desea cancelar el turno?')) {
+                    $.ajax({
+                        url: "app/Turno/AJAX/cancelarTurno.php",
+                        type: 'POST',
+                        data: "id_turno=" + id_turno,
                         success: function (res) {
-                            $('#formu').html(res);
-                            $('#datosaviones').load('app/Avion/AJAX/listadoAviones.php');
+                            $('#datosturnoscancelados').load('app/Turno/AJAX/listadoTurnosCancelados.php');
+                            $('#datosturnosconfirmados').load('app/Turno/AJAX/listadoTurnosConfirmados.php');
+                            $('#datosturnospendientes').load('app/Turno/AJAX/listadoTurnosPendientes.php');
                             paginar(0);
                         }
                     });
@@ -475,22 +559,22 @@
                 document.getElementById("actualpage").value = pagina;
                 if (modobusc > 0) {
                     $.ajax({
-                        url: "app/Avion/AJAX/listadoAviones.php",
+                        url: "app/Pago/AJAX/listadoPagos.php",
                         type: 'POST',
-                        data: "pagina=" + pagina + "&matricula_avion=" + document.getElementById("matricula_avion").value + "&nombre_avion=" + document.getElementById("nombre_avion").value + "&descripcion_avion=" + document.getElementById("descripcion_avion").value + "&tipo_avion=" + document.getElementById("tipo_avion").value+"&largo="+document.getElementById("largo").value,
+                        data: "pagina=" + pagina + "&dni_pago=" + document.getElementById("dni_pago").value + "&monto_pago=" + document.getElementById("monto_pago").value+"&fecha_pago=" + document.getElementById("fecha_pago").value+"&largo="+document.getElementById("largo").value,
                         success: function (res) {
-                            $('#datosaviones').html(res);
+                            $('#datospagos').html(res);
                             paginar(pagina);
                         }
                     });
                     return false;
                 } else {
                     $.ajax({
-                        url: "app/Avion/AJAX/listadoAviones.php",
+                        url: "app/Pago/AJAX/listadoPagos.php",
                         type: 'POST',
                         data: "pagina=" + pagina+"&largo="+document.getElementById("largo").value,
                         success: function (res) {
-                            $('#datosaviones').html(res);
+                            $('#datospagos').html(res);
                             paginar(pagina);
                         }
                     });
@@ -502,27 +586,28 @@
                 if (parseInt(document.getElementById('actualpage').value) < cantmost - 1) {
                     pagina = parseInt(document.getElementById("actualpage").value) + 1;
                     document.getElementById("actualpage").value = parseInt(document.getElementById("actualpage").value) + 1;
-                } else {
-                    pagina = parseInt(document.getElementById('actualpage').value);
+                }
+                else{
+                    pagina=parseInt(document.getElementById('actualpage').value);
                 }
                 if (modobusc > 0) {
                     $.ajax({
-                        url: "app/Avion/AJAX/listadoAviones.php",
+                        url: "app/Pago/AJAX/listadoPagos.php",
                         type: 'POST',
-                        data: "pagina=" + pagina + "&matricula_avion=" + document.getElementById("matricula_avion").value + "&nombre_avion=" + document.getElementById("nombre_avion").value + "&descripcion_avion=" + document.getElementById("descripcion_avion").value + "&tipo_avion=" + document.getElementById("tipo_avion").value+"&largo="+document.getElementById("largo").value,
+                        data: "pagina=" + pagina + "&dni_pago=" + document.getElementById("dni_pago").value + "&monto_pago=" + document.getElementById("monto_pago").value+"&fecha_pago=" + document.getElementById("fecha_pago").value+"&largo="+document.getElementById("largo").value,
                         success: function (res) {
-                            $('#datosaviones').html(res);
+                            $('#datospagos').html(res);
                             paginar(pagina);
                         }
                     });
                     return false;
                 } else {
                     $.ajax({
-                        url: "app/Avion/AJAX/listadoAviones.php",
+                        url: "app/Pago/AJAX/listadoPagos.php",
                         type: 'POST',
                         data: "pagina=" + pagina+"&largo="+document.getElementById("largo").value,
                         success: function (res) {
-                            $('#datosaviones').html(res);
+                            $('#datospagos').html(res);
                             paginar(pagina);
                         }
                     });
@@ -534,27 +619,28 @@
                 if (parseInt(document.getElementById('actualpage').value) > 0) {
                     pagina = parseInt(document.getElementById("actualpage").value) - 1;
                     document.getElementById("actualpage").value = parseInt(document.getElementById("actualpage").value) - 1;
-                } else {
-                    pagina = parseInt(document.getElementById('actualpage').value);
+                }
+                else{
+                    pagina=parseInt(document.getElementById('actualpage').value);
                 }
                 if (modobusc > 0) {
                     $.ajax({
-                        url: "app/Avion/AJAX/listadoAviones.php",
+                        url: "app/Pago/AJAX/listadoPagos.php",
                         type: 'POST',
-                        data: "pagina=" + pagina + "&matricula_avion=" + document.getElementById("matricula_avion").value + "&nombre_avion=" + document.getElementById("nombre_avion").value + "&descripcion_avion=" + document.getElementById("descripcion_avion").value + "&tipo_avion=" + document.getElementById("tipo_avion").value+"&largo="+document.getElementById("largo").value,
+                        data: "pagina=" + pagina + "&dni_pago=" + document.getElementById("dni_pago").value + "&monto_pago=" + document.getElementById("monto_pago").value+"&fecha_pago=" + document.getElementById("fecha_pago").value+"&largo="+document.getElementById("largo").value,
                         success: function (res) {
-                            $('#datosaviones').html(res);
+                            $('#datospagos').html(res);
                             paginar(pagina);
                         }
                     });
                     return false;
                 } else {
                     $.ajax({
-                        url: "app/Avion/AJAX/listadoAviones.php",
+                        url: "app/Pago/AJAX/listadoPagos.php",
                         type: 'POST',
                         data: "pagina=" + pagina+"&largo="+document.getElementById("largo").value,
                         success: function (res) {
-                            $('#datosaviones').html(res);
+                            $('#datospagos').html(res);
                             paginar(pagina);
                         }
                     });
@@ -565,21 +651,21 @@
         var modobusc = $('input[id="modbusc"]:checked').length;
         if (modobusc > 0) {
             $.ajax({
-                url: "app/Avion/AJAX/listadoAviones.php",
+                url: "app/Pago/AJAX/listadoPagos.php",
                 type: 'POST',
                 data: $('#formu').serialize()+"&largo="+document.getElementById("largo").value,
                 success: function (res) {
-                    $('#datosaviones').html(res);
+                    $('#datospagos').html(res);
                 }
             });
             paginar(0);
         } else {
             $.ajax({
-                        url: "app/Avion/AJAX/listadoAviones.php",
+                        url: "app/Pago/AJAX/listadoPagos.php",
                         type: 'POST',
                         data: "largo="+document.getElementById("largo").value,
                         success: function (res) {
-                            $('#datosaviones').html(res);
+                            $('#datospagos').html(res);
                         }
                     });
                     paginar(0);

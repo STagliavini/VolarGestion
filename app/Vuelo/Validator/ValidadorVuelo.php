@@ -65,7 +65,7 @@ class ValidadorVuelo {
                 return "Debe ingresar un formato valido(dd/MM/yyyy)";
             }
         } else {
-            return "Debe ingresar el nombre del avion";
+            return "Debe ingresar la fecha de vuelo";
         }
     }
 
