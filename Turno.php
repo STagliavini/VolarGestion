@@ -268,7 +268,7 @@
                         <h3><b>PENDIENTES DE CONFIRMACION</b></h3>
                         <div class="row">
                                     <div class="col-sm-12 col-md-6">
-                                        <label>Mostrar<select name="largo" id="largo" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="10" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
+                                        <label>Mostrar<select name="largo0" id="largo0" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="1" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
                                     </div>
                                 </div>
                         <br>
@@ -286,7 +286,7 @@
 
                             </tbody>
                         </table>
-                        <input type="hidden" id='actualpage' value='0'/>
+                        <input type="hidden" id='actualpage0' value='0'/>
                         
                     </div><!-- col-md-6 -->
                     
@@ -309,7 +309,7 @@
                         <h3><b>CONFIRMADOS</b></h3>
                         <div class="row">
                                     <div class="col-sm-12 col-md-6">
-                                        <label>Mostrar<select name="largo" id="largo" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="10" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
+                                        <label>Mostrar<select name="largo1" id="largo1" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="1" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
                                     </div>
                                 </div>
                         <br>
@@ -327,7 +327,7 @@
 
                             </tbody>
                         </table>
-                        <input type="hidden" id='actualpage' value='0'/>
+                        <input type="hidden" id='actualpage1' value='0'/>
                     </div><!-- col-md-6 -->
                     <div class="row" id="paginador1">
                             
@@ -339,7 +339,7 @@
                         <h3><b>CANCELADOS</b></h3>
                         <div class="row">
                                     <div class="col-sm-12 col-md-6">
-                                        <label>Mostrar<select name="largo" id="largo" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="10" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
+                                        <label>Mostrar<select name="largo2" id="largo2" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="1" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
                                     </div>
                                 </div>
                         <br>
@@ -357,7 +357,7 @@
 
                             </tbody>
                         </table>
-                        <input type="hidden" id='actualpage' value='0'/>
+                        <input type="hidden" id='actualpage2' value='0'/>
                     </div><!-- col-md-6 -->
                     </div>
                         <div class="row" id="paginador2">
@@ -483,7 +483,7 @@
                     $.ajax({
                         url: "app/Paginador/Paginar.php",
                         type: 'POST',
-                        data: "turnometodo=0&metodo=Turno"+"&largo="+document.getElementById("largo").value+"&pag="+pagina,
+                        data: "turnometodo=0&metodo=Turno"+"&largo0="+document.getElementById("largo0").value+"&pag="+pagina,
                         success: function (res) {
                             $('#paginador0').html(res);
                         }
@@ -491,7 +491,7 @@
                     $.ajax({
                         url: "app/Paginador/Paginar.php",
                         type: 'POST',
-                        data: "turnometodo=1&metodo=Turno"+"&largo="+document.getElementById("largo").value+"&pag="+pagina,
+                        data: "turnometodo=1&metodo=Turno"+"&largo1="+document.getElementById("largo1").value+"&pag="+pagina,
                         success: function (res) {
                             $('#paginador1').html(res);
                         }
@@ -499,7 +499,7 @@
                     $.ajax({
                         url: "app/Paginador/Paginar.php",
                         type: 'POST',
-                        data: "turnometodo=2&metodo=Turno"+"&largo="+document.getElementById("largo").value+"&pag="+pagina,
+                        data: "turnometodo=2&metodo=Turno"+"&largo2="+document.getElementById("largo2").value+"&pag="+pagina,
                         success: function (res) {
                             $('#paginador2').html(res);
                         }
@@ -554,75 +554,21 @@
                     return false;
                 }
             }
-            function cambiar(pagina) {
-                var modobusc = $('input[id="modbusc"]:checked').length;
-                document.getElementById("actualpage").value = pagina;
-                if (modobusc > 0) {
-                    $.ajax({
-                        url: "app/Pago/AJAX/listadoPagos.php",
-                        type: 'POST',
-                        data: "pagina=" + pagina + "&dni_pago=" + document.getElementById("dni_pago").value + "&monto_pago=" + document.getElementById("monto_pago").value+"&fecha_pago=" + document.getElementById("fecha_pago").value+"&largo="+document.getElementById("largo").value,
-                        success: function (res) {
-                            $('#datospagos').html(res);
-                            paginar(pagina);
-                        }
-                    });
-                    return false;
-                } else {
-                    $.ajax({
-                        url: "app/Pago/AJAX/listadoPagos.php",
-                        type: 'POST',
-                        data: "pagina=" + pagina+"&largo="+document.getElementById("largo").value,
-                        success: function (res) {
-                            $('#datospagos').html(res);
-                            paginar(pagina);
-                        }
-                    });
-                    return false;
-                }
-            }
-            function pagsiguiente(cantmost) {
-                var modobusc = $('input[id="modbusc"]:checked').length;
-                if (parseInt(document.getElementById('actualpage').value) < cantmost - 1) {
-                    pagina = parseInt(document.getElementById("actualpage").value) + 1;
-                    document.getElementById("actualpage").value = parseInt(document.getElementById("actualpage").value) + 1;
+            function cambiar(pagina,metodo) {
+                if(parseInt(metodo)==0){
+                 document.getElementById("actualpage0").value = pagina;
                 }
                 else{
-                    pagina=parseInt(document.getElementById('actualpage').value);
-                }
-                if (modobusc > 0) {
-                    $.ajax({
-                        url: "app/Pago/AJAX/listadoPagos.php",
-                        type: 'POST',
-                        data: "pagina=" + pagina + "&dni_pago=" + document.getElementById("dni_pago").value + "&monto_pago=" + document.getElementById("monto_pago").value+"&fecha_pago=" + document.getElementById("fecha_pago").value+"&largo="+document.getElementById("largo").value,
-                        success: function (res) {
-                            $('#datospagos').html(res);
-                            paginar(pagina);
-                        }
-                    });
-                    return false;
-                } else {
-                    $.ajax({
-                        url: "app/Pago/AJAX/listadoPagos.php",
-                        type: 'POST',
-                        data: "pagina=" + pagina+"&largo="+document.getElementById("largo").value,
-                        success: function (res) {
-                            $('#datospagos').html(res);
-                            paginar(pagina);
-                        }
-                    });
-                    return false;
-                }
-            }
-            function paganterior() {
-                var modobusc = $('input[id="modbusc"]:checked').length;
-                if (parseInt(document.getElementById('actualpage').value) > 0) {
-                    pagina = parseInt(document.getElementById("actualpage").value) - 1;
-                    document.getElementById("actualpage").value = parseInt(document.getElementById("actualpage").value) - 1;
+                    if(parseInt(metodo)==1){
+                 document.getElementById("actualpage1").value = pagina;
                 }
                 else{
-                    pagina=parseInt(document.getElementById('actualpage').value);
+                    if(parseInt(metodo)==2){
+                 document.getElementById("actualpage2").value = pagina;
                 }
+                }
+                }
+                var modobusc = $('input[id="modbusc"]:checked').length;
                 if (modobusc > 0) {
                     $.ajax({
                         url: "app/Pago/AJAX/listadoPagos.php",
@@ -635,19 +581,197 @@
                     });
                     return false;
                 } else {
+                    if(parseInt(metodo)==0){
+                        $.ajax({
+                        url: "app/Turno/AJAX/listadoTurnosPendientes.php",
+                        type: 'POST',
+                        data: "pagina=" + pagina+"&largo0="+document.getElementById("largo0").value,
+                        success: function (res) {
+                            $('#datosturnospendientes').html(res);
+                            paginar(pagina);
+                        }
+                    });
+                    }
+                    if(parseInt(metodo)==1){
+                        $.ajax({
+                        url: "app/Turno/AJAX/listadoTurnosConfirmados.php",
+                        type: 'POST',
+                        data: "pagina=" + pagina+"&largo1="+document.getElementById("largo1").value,
+                        success: function (res) {
+                            $('#datosturnosconfirmados').html(res);
+                            paginar(pagina);
+                        }
+                    });
+                    }
+                    if(parseInt(metodo)==2){
+                        $.ajax({
+                        url: "app/Turno/AJAX/listadoTurnosCancelados.php",
+                        type: 'POST',
+                        data: "pagina=" + pagina+"&largo2="+document.getElementById("largo2").value,
+                        success: function (res) {
+                            $('#datosturnoscancelados').html(res);
+                            paginar(pagina);
+                        }
+                    });
+                    }
+                    return false;
+                }
+            }
+            function pagsiguiente(cantmost,metodo) {
+                var modobusc = $('input[id="modbusc"]:checked').length;
+            if(metodo==0){
+                if (parseInt(document.getElementById('actualpage0').value) < cantmost - 1) {
+                    pagina = parseInt(document.getElementById("actualpage0").value) + 1;
+                    document.getElementById("actualpage0").value = parseInt(document.getElementById("actualpage0").value) + 1;
+                }
+                else{
+                    pagina=parseInt(document.getElementById('actualpage0').value);
+                }
+            }
+            if(metodo==1){
+                if (parseInt(document.getElementById('actualpage1').value) < cantmost - 1) {
+                    pagina = parseInt(document.getElementById("actualpage1").value) + 1;
+                    document.getElementById("actualpage1").value = parseInt(document.getElementById("actualpage1").value) + 1;
+                }
+                else{
+                    pagina=parseInt(document.getElementById('actualpage1').value);
+                }
+            }
+            if(metodo==2){
+                if (parseInt(document.getElementById('actualpage2').value) < cantmost - 1) {
+                    pagina = parseInt(document.getElementById("actualpage2").value) + 1;
+                    document.getElementById("actualpage2").value = parseInt(document.getElementById("actualpage2").value) + 1;
+                }
+                else{
+                    pagina=parseInt(document.getElementById('actualpage2').value);
+                }
+            }
+            if (modobusc > 0) {
                     $.ajax({
                         url: "app/Pago/AJAX/listadoPagos.php",
                         type: 'POST',
-                        data: "pagina=" + pagina+"&largo="+document.getElementById("largo").value,
+                        data: "pagina=" + pagina + "&dni_pago=" + document.getElementById("dni_pago").value + "&monto_pago=" + document.getElementById("monto_pago").value+"&fecha_pago=" + document.getElementById("fecha_pago").value+"&largo="+document.getElementById("largo").value,
                         success: function (res) {
                             $('#datospagos').html(res);
                             paginar(pagina);
                         }
                     });
                     return false;
+                } else {
+                    if(parseInt(metodo)==0){
+                        $.ajax({
+                        url: "app/Turno/AJAX/listadoTurnosPendientes.php",
+                        type: 'POST',
+                        data: "pagina=" + pagina+"&largo0="+document.getElementById("largo0").value,
+                        success: function (res) {
+                            $('#datosturnospendientes').html(res);
+                            paginar(pagina);
+                        }
+                    });
+                    }
+                    if(parseInt(metodo)==1){
+                        $.ajax({
+                        url: "app/Turno/AJAX/listadoTurnosConfirmados.php",
+                        type: 'POST',
+                        data: "pagina=" + pagina+"&largo1="+document.getElementById("largo1").value,
+                        success: function (res) {
+                            $('#datosturnosconfirmados').html(res);
+                            paginar(pagina);
+                        }
+                    });
+                    }
+                    if(parseInt(metodo)==2){
+                        $.ajax({
+                        url: "app/Turno/AJAX/listadoTurnosCancelados.php",
+                        type: 'POST',
+                        data: "pagina=" + pagina+"&largo2="+document.getElementById("largo2").value,
+                        success: function (res) {
+                            $('#datosturnoscancelados').html(res);
+                            paginar(pagina);
+                        }
+                    });
+                    }
+                    return false;
                 }
             }
-            $('#largo').change(function () {
+            function paganterior(metodo) {
+                var modobusc = $('input[id="modbusc"]:checked').length;
+                if(metodo==0){
+                if (parseInt(document.getElementById('actualpage0').value) > 0) {
+                    pagina = parseInt(document.getElementById("actualpage0").value) - 1;
+                    document.getElementById("actualpage0").value = parseInt(document.getElementById("actualpage0").value) - 1;
+                }
+                else{
+                    pagina=parseInt(document.getElementById('actualpage0').value);
+                }
+            }
+            if(metodo==1){
+                if (parseInt(document.getElementById('actualpage1').value) > 0) {
+                    pagina = parseInt(document.getElementById("actualpage1").value) - 1;
+                    document.getElementById("actualpage1").value = parseInt(document.getElementById("actualpage1").value) - 1;
+                }
+                else{
+                    pagina=parseInt(document.getElementById('actualpage1').value);
+                }
+            }
+            if(metodo==2){
+                if (parseInt(document.getElementById('actualpage2').value) > 0) {
+                    pagina = parseInt(document.getElementById("actualpage2").value) - 1;
+                    document.getElementById("actualpage2").value = parseInt(document.getElementById("actualpage2").value) - 1;
+                }
+                else{
+                    pagina=parseInt(document.getElementById('actualpage2').value);
+                }
+            }
+                if (modobusc > 0) {
+                    $.ajax({
+                        url: "app/Pago/AJAX/listadoPagos.php",
+                        type: 'POST',
+                        data: "pagina=" + pagina + "&dni_pago=" + document.getElementById("dni_pago").value + "&monto_pago=" + document.getElementById("monto_pago").value+"&fecha_pago=" + document.getElementById("fecha_pago").value+"&largo="+document.getElementById("largo").value,
+                        success: function (res) {
+                            $('#datospagos').html(res);
+                            paginar(pagina);
+                        }
+                    });
+                    return false;
+                } else {
+                    if(parseInt(metodo)==0){
+                        $.ajax({
+                        url: "app/Turno/AJAX/listadoTurnosPendientes.php",
+                        type: 'POST',
+                        data: "pagina=" + pagina+"&largo0="+document.getElementById("largo0").value,
+                        success: function (res) {
+                            $('#datosturnospendientes').html(res);
+                            paginar(pagina);
+                        }
+                    });
+                    }
+                    if(parseInt(metodo)==1){
+                        $.ajax({
+                        url: "app/Turno/AJAX/listadoTurnosConfirmados.php",
+                        type: 'POST',
+                        data: "pagina=" + pagina+"&largo1="+document.getElementById("largo1").value,
+                        success: function (res) {
+                            $('#datosturnosconfirmados').html(res);
+                            paginar(pagina);
+                        }
+                    });
+                    }
+                    if(parseInt(metodo)==2){
+                        $.ajax({
+                        url: "app/Turno/AJAX/listadoTurnosCancelados.php",
+                        type: 'POST',
+                        data: "pagina=" + pagina+"&largo2="+document.getElementById("largo2").value,
+                        success: function (res) {
+                            $('#datosturnoscancelados').html(res);
+                            paginar(pagina);
+                        }
+                    });
+                    }
+                    return false;
+                }
+            }
+            $('#largo0').change(function () {
         var modobusc = $('input[id="modbusc"]:checked').length;
         if (modobusc > 0) {
             $.ajax({
@@ -661,15 +785,65 @@
             paginar(0);
         } else {
             $.ajax({
-                        url: "app/Pago/AJAX/listadoPagos.php",
+                        url: "app/Turno/AJAX/listadoTurnosPendientes.php",
                         type: 'POST',
-                        data: "largo="+document.getElementById("largo").value,
+                        data: "largo0="+document.getElementById("largo0").value,
                         success: function (res) {
-                            $('#datospagos').html(res);
+                            $('#datosturnospendientes').html(res);
                         }
                     });
-                    paginar(0);
-                    return false;
+            paginar(0);
+            return false;
+        }
+    });
+    $('#largo1').change(function () {
+        var modobusc = $('input[id="modbusc"]:checked').length;
+        if (modobusc > 0) {
+            $.ajax({
+                url: "app/Pago/AJAX/listadoPagos.php",
+                type: 'POST',
+                data: $('#formu').serialize()+"&largo="+document.getElementById("largo").value,
+                success: function (res) {
+                    $('#datospagos').html(res);
+                }
+            });
+            paginar(0);
+        } else {
+            $.ajax({
+                        url: "app/Turno/AJAX/listadoTurnosConfirmados.php",
+                        type: 'POST',
+                        data: "largo1="+document.getElementById("largo1").value,
+                        success: function (res) {
+                            $('#datosturnosconfirmados').html(res);
+                            paginar(0);
+                        }
+                    });
+            return false;
+        }
+    });
+    $('#largo2').change(function () {
+        var modobusc = $('input[id="modbusc"]:checked').length;
+        if (modobusc > 0) {
+            $.ajax({
+                url: "app/Pago/AJAX/listadoPagos.php",
+                type: 'POST',
+                data: $('#formu').serialize()+"&largo="+document.getElementById("largo").value,
+                success: function (res) {
+                    $('#datospagos').html(res);
+                }
+            });
+            paginar(0);
+        } else {
+            $.ajax({
+                        url: "app/Turno/AJAX/listadoTurnosCancelados.php",
+                        type: 'POST',
+                        data: "largo2="+document.getElementById("largo2").value,
+                        success: function (res) {
+                            $('#datosturnoscancelados').html(res);
+                            paginar(0);
+                        }
+                    });
+            return false;
         }
     });
         </script>

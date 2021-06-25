@@ -240,16 +240,34 @@
         var modobusc = $('input[id="modbusc"]:checked').length;
         if (modobusc > 0) {
             $.ajax({
-                url: "app/Vuelo/AJAX/listadoVuelos.php",
+                url: "app/Turno/AJAX/listadoTurnosPendientes.php",
                 type: 'POST',
                 data: $('#formu').serialize(),
                 success: function (res) {
-                    $('#datosvuelos').html(res);
+                    $('#datosturnospendientes').html(res);
+                }
+            });
+            $.ajax({
+                url: "app/Turno/AJAX/listadoTurnosConfirmados.php",
+                type: 'POST',
+                data: $('#formu').serialize(),
+                success: function (res) {
+                    $('#datosturnosconfirmados').html(res);
+                }
+            });
+            $.ajax({
+                url: "app/Turno/AJAX/listadoTurnosCancelados.php",
+                type: 'POST',
+                data: $('#formu').serialize(),
+                success: function (res) {
+                    $('#datosturnoscancelados').html(res);
                 }
             });
             paginar(0);
         } else {
-            $('#datosvuelos').load('app/Vuelo/AJAX/listadoVuelos.php');
+            $('#datosturnospendientes').load('app/Turno/AJAX/listadoTurnosPendientes.php');
+            $('#datosturnosconfirmados').load('app/Turno/AJAX/listadoTurnosConfirmados.php');
+            $('#datosturnoscancelados').load('app/Turno/AJAX/listadoTurnosCancelados.php');
             paginar(0);
         }
     });
@@ -269,7 +287,7 @@
                     $.ajax({
                         url: "app/Paginador/Paginar.php",
                         type: 'POST',
-                        data: "turnometodo=0&metodo=Turno"+"&largo="+document.getElementById("largo").value+"&pag="+pagina,
+                        data: "turnometodo=0&metodo=Turno"+"&largo0="+document.getElementById("largo0").value+"&pag="+pagina,
                         success: function (res) {
                             $('#paginador0').html(res);
                         }
@@ -277,7 +295,7 @@
                     $.ajax({
                         url: "app/Paginador/Paginar.php",
                         type: 'POST',
-                        data: "turnometodo=1&metodo=Turno"+"&largo="+document.getElementById("largo").value+"&pag="+pagina,
+                        data: "turnometodo=1&metodo=Turno"+"&largo1="+document.getElementById("largo1").value+"&pag="+pagina,
                         success: function (res) {
                             $('#paginador1').html(res);
                         }
@@ -285,7 +303,7 @@
                     $.ajax({
                         url: "app/Paginador/Paginar.php",
                         type: 'POST',
-                        data: "turnometodo=2&metodo=Turno"+"&largo="+document.getElementById("largo").value+"&pag="+pagina,
+                        data: "turnometodo=2&metodo=Turno"+"&largo2="+document.getElementById("largo2").value+"&pag="+pagina,
                         success: function (res) {
                             $('#paginador2').html(res);
                         }

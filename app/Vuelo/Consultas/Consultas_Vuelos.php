@@ -207,7 +207,7 @@ class Consultas_Vuelos {
                     $sql = $sql . "copiloto_vuelo like :copiloto_vuelo and ";
                 }
                 else{
-                    $sql = $sql . "copiloto_vuelo is null or copiloto_vuelo!='' and ";
+                    $sql = $sql . "(copiloto_vuelo is null or copiloto_vuelo!='') and ";
                 }
                 if (isset($avion_vuelo)&&$avion_vuelo!='') {
                     $sql = $sql . "avion_vuelo like :avion_vuelo";

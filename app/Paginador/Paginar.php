@@ -287,9 +287,7 @@ if (isset($_POST['metodo'])) {
                             if (isset($_POST['aclaracion_turno'])) {
                                 $pam[] = $_POST['aclaracion_turno'];
                             }
-                            if (isset($_POST['largo'])) {
-                                $largo = $_POST['largo'];
-                            }
+                            $largo=1;
                             if (isset($_POST['pag'])) {
                                 $pag = $_POST['pag'];
                             }
@@ -298,12 +296,21 @@ if (isset($_POST['metodo'])) {
                             }
                             if ($turnometodo == 0) {
                                 $pam[7] = 0;
+                                if (isset($_POST['largo0'])) {
+                                $largo = $_POST['largo0'];
+                            }
                             } else {
                                 if ($turnometodo == 1) {
                                     $pam[7] = 1;
+                                    if (isset($_POST['largo1'])) {
+                                $largo = $_POST['largo1'];
+                            }
                                 } else {
                                     if ($turnometodo == 2) {
                                         $pam[7] = 2;
+                                        if (isset($_POST['largo2'])) {
+                                $largo = $_POST['largo2'];
+                            }
                                     }
                                 }
                             }
@@ -325,11 +332,27 @@ if (isset($_POST['metodo'])) {
                             echo '<div class="col-sm-12 col-md-7">';
                             echo '<nav aria-label="Page navigation example">';
                             echo '<ul class="pagination">';
-                            echo '<li class="page-item"><button class="page-link" type="submit" onclick="return paganterior();">Anterior</button></li>';
-                            for ($index = 0; $index < $cantidad_most; $index++) {
-                                echo '<li class="page-item"><button class="page-link" type="submit" value=' . $index . ' onclick="return cambiar(' . $index . ');">' . ($index + 1) . '</button></li>';
+                            if($turnometodo==0){
+                                echo '<li class="page-item"><button class="page-link" type="submit" onclick="return paganterior(0);">Anterior</button></li>';
+                                for ($index = 0; $index < $cantidad_most; $index++) {
+                                echo '<li class="page-item"><button class="page-link" type="submit" value=' . $index . ' onclick="return cambiar(' . $index . ',0);">' . ($index + 1) . '</button></li>';
                             }
-                            echo '<li class="page-item"><button class="page-link" type="submit" onclick="return pagsiguiente(' . $cantidad_most . ');">Siguiente</button></li>';
+                            echo '<li class="page-item"><button class="page-link" type="submit" onclick="return pagsiguiente(' . $cantidad_most . ',0);">Siguiente</button></li>';
+                            }
+                            if($turnometodo==1){
+                                echo '<li class="page-item"><button class="page-link" type="submit" onclick="return paganterior(1);">Anterior</button></li>';
+                                for ($index = 0; $index < $cantidad_most; $index++) {
+                                echo '<li class="page-item"><button class="page-link" type="submit" value=' . $index . ' onclick="return cambiar(' . $index . ',1);">' . ($index + 1) . '</button></li>';
+                            }
+                            echo '<li class="page-item"><button class="page-link" type="submit" onclick="return pagsiguiente(' . $cantidad_most . ',1);">Siguiente</button></li>';
+                            }
+                            if($turnometodo==2){
+                                echo '<li class="page-item"><button class="page-link" type="submit" onclick="return paganterior(2);">Anterior</button></li>';
+                                for ($index = 0; $index < $cantidad_most; $index++) {
+                                echo '<li class="page-item"><button class="page-link" type="submit" value=' . $index . ' onclick="return cambiar(' . $index . ',2);">' . ($index + 1) . '</button></li>';
+                            }
+                            echo '<li class="page-item"><button class="page-link" type="submit" onclick="return pagsiguiente(' . $cantidad_most . ',2);">Siguiente</button></li>';
+                            }
                             echo '</ul>';
                             echo '</nav>';
                             echo '</div>';

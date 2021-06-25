@@ -102,9 +102,9 @@ class Consultas_Turnos{
                 if(isset($_POST['pagina'])){
                     $pagina=$_POST['pagina'];
                 }
-                if(isset($_POST['largo'])){
-                    $largo=$_POST['largo'];
-                }
+                if (isset($_POST['largo0'])) {
+                                $largo = $_POST['largo0'];
+                            }
                 $sql = "select * from turno where estado_turno=0 and (";
                 if (isset($piloto_turno)&&$piloto_turno!='') {
                     $sql = $sql . "piloto_turno like :piloto_turno and ";
@@ -113,10 +113,10 @@ class Consultas_Turnos{
                     $sql = $sql . "piloto_turno is not null and ";
                 }
                 if (isset($copiloto_turno)&&$copiloto_turno!='') {
-                    $sql = $sql . "copiloto_turno like :copiloto_turno and ";
+                    $sql = $sql . "(copiloto_turno like :copiloto_turno) and ";
                 }
                 else{
-                    $sql = $sql . "copiloto_turno is null or copiloto_turno!='' and ";
+                    $sql = $sql . "(copiloto_turno is null or copiloto_turno!='') and ";
                 }
                 if (isset($fecha_turno)&&$fecha_turno!='') {
                     $sql = $sql . "fecha_turno like :fecha_turno and ";
@@ -143,10 +143,10 @@ class Consultas_Turnos{
                     $sql = $sql . "avion_turno!='' and ";
                 }
                 if (isset($aclaracion_turno)&&$aclaracion_turno!='') {
-                    $sql = $sql . "aclaracion_turno like :aclaracion_turno) ";
+                    $sql = $sql . "(aclaracion_turno like :aclaracion_turno)) ";
                 }
                 else{
-                    $sql = $sql . "aclaracion_turno!='' or aclaracion_turno is not null) ";
+                    $sql = $sql . "(aclaracion_turno!='' or aclaracion_turno is not null)) ";
                 }
                 $sql=$sql."order by fecha_turno asc, salida_turno asc";
                 if(!isset($pagina)){
@@ -220,9 +220,9 @@ class Consultas_Turnos{
                 if(isset($_POST['pagina'])){
                     $pagina=$_POST['pagina'];
                 }
-                if(isset($_POST['largo'])){
-                    $largo=$_POST['largo'];
-                }
+                if (isset($_POST['largo1'])) {
+                                $largo = $_POST['largo1'];
+                            }
                 $sql = "select * from turno where estado_turno=1 and (";
                 if (isset($piloto_turno)&&$piloto_turno!='') {
                     $sql = $sql . "piloto_turno like :piloto_turno and ";
@@ -231,10 +231,10 @@ class Consultas_Turnos{
                     $sql = $sql . "piloto_turno is not null and ";
                 }
                 if (isset($copiloto_turno)&&$copiloto_turno!='') {
-                    $sql = $sql . "copiloto_turno like :copiloto_turno and ";
+                    $sql = $sql . "(copiloto_turno like :copiloto_turno) and ";
                 }
                 else{
-                    $sql = $sql . "copiloto_turno is null or copiloto_turno!='' and ";
+                    $sql = $sql . "(copiloto_turno is null or copiloto_turno!='') and ";
                 }
                 if (isset($fecha_turno)&&$fecha_turno!='') {
                     $sql = $sql . "fecha_turno like :fecha_turno and ";
@@ -261,10 +261,10 @@ class Consultas_Turnos{
                     $sql = $sql . "avion_turno!='' and ";
                 }
                 if (isset($aclaracion_turno)&&$aclaracion_turno!='') {
-                    $sql = $sql . "aclaracion_turno like :aclaracion_turno) ";
+                    $sql = $sql . "(aclaracion_turno like :aclaracion_turno)) ";
                 }
                 else{
-                    $sql = $sql . "aclaracion_turno!='' or aclaracion_turno is not null) ";
+                    $sql = $sql . "(aclaracion_turno!='' or aclaracion_turno is not null)) ";
                 }
                 $sql=$sql."order by fecha_turno asc, salida_turno asc";
                 if(!isset($pagina)){
@@ -338,9 +338,9 @@ class Consultas_Turnos{
                 if(isset($_POST['pagina'])){
                     $pagina=$_POST['pagina'];
                 }
-                if(isset($_POST['largo'])){
-                    $largo=$_POST['largo'];
-                }
+                if (isset($_POST['largo2'])) {
+                                $largo = $_POST['largo2'];
+                            }
                 $sql = "select * from turno where estado_turno=2 and (";
                 if (isset($piloto_turno)&&$piloto_turno!='') {
                     $sql = $sql . "piloto_turno like :piloto_turno and ";
@@ -349,10 +349,10 @@ class Consultas_Turnos{
                     $sql = $sql . "piloto_turno is not null and ";
                 }
                 if (isset($copiloto_turno)&&$copiloto_turno!='') {
-                    $sql = $sql . "copiloto_turno like :copiloto_turno and ";
+                    $sql = $sql . "(copiloto_turno like :copiloto_turno) and ";
                 }
                 else{
-                    $sql = $sql . "copiloto_turno is null or copiloto_turno!='' and ";
+                    $sql = $sql . "(copiloto_turno is null or copiloto_turno!='') and ";
                 }
                 if (isset($fecha_turno)&&$fecha_turno!='') {
                     $sql = $sql . "fecha_turno like :fecha_turno and ";
@@ -379,10 +379,10 @@ class Consultas_Turnos{
                     $sql = $sql . "avion_turno!='' and ";
                 }
                 if (isset($aclaracion_turno)&&$aclaracion_turno!='') {
-                    $sql = $sql . "aclaracion_turno like :aclaracion_turno) ";
+                    $sql = $sql . "(aclaracion_turno like :aclaracion_turno)) ";
                 }
                 else{
-                    $sql = $sql . "aclaracion_turno!='' or aclaracion_turno is not null) ";
+                    $sql = $sql . "(aclaracion_turno!='' or aclaracion_turno is not null)) ";
                 }
                 $sql=$sql."order by fecha_turno asc, salida_turno asc";
                 if(!isset($pagina)){
@@ -463,10 +463,10 @@ class Consultas_Turnos{
                     $sql = $sql . "piloto_turno is not null and ";
                 }
                 if (isset($copiloto_turno)&&$copiloto_turno!='') {
-                    $sql = $sql . "copiloto_turno like :copiloto_turno and ";
+                    $sql = $sql . "(copiloto_turno like :copiloto_turno) and ";
                 }
                 else{
-                    $sql = $sql . "copiloto_turno is null or copiloto_turno!='' and ";
+                    $sql = $sql . "(copiloto_turno is null or copiloto_turno!='') and ";
                 }
                 if (isset($fecha_turno)&&$fecha_turno!='') {
                     $sql = $sql . "fecha_turno like :fecha_turno and ";
@@ -493,10 +493,10 @@ class Consultas_Turnos{
                     $sql = $sql . "avion_turno!='' and ";
                 }
                 if (isset($aclaracion_turno)&&$aclaracion_turno!='') {
-                    $sql = $sql . "aclaracion_turno like :aclaracion_turno) ";
+                    $sql = $sql . "(aclaracion_turno like :aclaracion_turno)) ";
                 }
                 else{
-                    $sql = $sql . "aclaracion_turno!='' or aclaracion_turno is not null)";
+                    $sql = $sql . "(aclaracion_turno!='' or aclaracion_turno is not null)) ";
                 }
                 $sentencia = $conexion->prepare($sql);
                 if (isset($piloto_turno)&&$piloto_turno!=''){
