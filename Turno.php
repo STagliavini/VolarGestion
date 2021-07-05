@@ -268,7 +268,7 @@
                         <h3><b>PENDIENTES DE CONFIRMACION</b></h3>
                         <div class="row">
                                     <div class="col-sm-12 col-md-6">
-                                        <label>Mostrar<select name="largo0" id="largo0" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="1" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
+                                        <label>Mostrar<select name="largo0" id="largo0" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="10" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
                                     </div>
                                 </div>
                         <br>
@@ -309,7 +309,7 @@
                         <h3><b>CONFIRMADOS</b></h3>
                         <div class="row">
                                     <div class="col-sm-12 col-md-6">
-                                        <label>Mostrar<select name="largo1" id="largo1" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="1" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
+                                        <label>Mostrar<select name="largo1" id="largo1" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="10" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
                                     </div>
                                 </div>
                         <br>
@@ -339,7 +339,7 @@
                         <h3><b>CANCELADOS</b></h3>
                         <div class="row">
                                     <div class="col-sm-12 col-md-6">
-                                        <label>Mostrar<select name="largo2" id="largo2" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="1" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
+                                        <label>Mostrar<select name="largo2" id="largo2" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="10" selected>10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label>
                                     </div>
                                 </div>
                         <br>
@@ -473,7 +473,23 @@
                     $.ajax({
                         url: "app/Paginador/Paginar.php",
                         type: 'POST',
-                        data: "dni_pago=" + document.getElementById("dni_pago").value + "&monto_pago=" + document.getElementById("monto_pago").value+"&fecha_pago=" + document.getElementById("fecha_pago").value+"&metodo=Pago"+"&largo="+document.getElementById("largo").value+"&pag="+pagina,
+                        data: "piloto_turno=" + document.getElementById("piloto_turno").value +"copiloto_turno=" + document.getElementById("copiloto_turno").value +"fecha_turno=" + document.getElementById("fecha_turno").value +"salida_turno=" + document.getElementById("salida_turno").value +"llegada_turno=" + document.getElementById("llegada_turno").value +"avion_turno=" + document.getElementById("avion_turno").value +"aclaracion_turno=" + document.getElementById("aclaracion_turno").value +"&turnometodo=0&metodo=Turno"+"&largo0="+document.getElementById("largo0").value+"&pag="+pagina,
+                        success: function (res) {
+                            $('#paginador').html(res);
+                        }
+                    });
+                    $.ajax({
+                        url: "app/Paginador/Paginar.php",
+                        type: 'POST',
+                        data: "piloto_turno=" + document.getElementById("piloto_turno").value +"copiloto_turno=" + document.getElementById("copiloto_turno").value +"fecha_turno=" + document.getElementById("fecha_turno").value +"salida_turno=" + document.getElementById("salida_turno").value +"llegada_turno=" + document.getElementById("llegada_turno").value +"avion_turno=" + document.getElementById("avion_turno").value +"aclaracion_turno=" + document.getElementById("aclaracion_turno").value +"&turnometodo=1&metodo=Turno"+"&largo1="+document.getElementById("largo0").value+"&pag="+pagina,
+                        success: function (res) {
+                            $('#paginador').html(res);
+                        }
+                    });
+                    $.ajax({
+                        url: "app/Paginador/Paginar.php",
+                        type: 'POST',
+                        data: "piloto_turno=" + document.getElementById("piloto_turno").value +"copiloto_turno=" + document.getElementById("copiloto_turno").value +"fecha_turno=" + document.getElementById("fecha_turno").value +"salida_turno=" + document.getElementById("salida_turno").value +"llegada_turno=" + document.getElementById("llegada_turno").value +"avion_turno=" + document.getElementById("avion_turno").value +"aclaracion_turno=" + document.getElementById("aclaracion_turno").value +"&turnometodo=2&metodo=Turno"+"&largo2="+document.getElementById("largo0").value+"&pag="+pagina,
                         success: function (res) {
                             $('#paginador').html(res);
                         }
@@ -571,11 +587,29 @@
                 var modobusc = $('input[id="modbusc"]:checked').length;
                 if (modobusc > 0) {
                     $.ajax({
-                        url: "app/Pago/AJAX/listadoPagos.php",
+                        url: "app/Turno/AJAX/listadoTurnosPendientes.php",
                         type: 'POST',
-                        data: "pagina=" + pagina + "&dni_pago=" + document.getElementById("dni_pago").value + "&monto_pago=" + document.getElementById("monto_pago").value+"&fecha_pago=" + document.getElementById("fecha_pago").value+"&largo="+document.getElementById("largo").value,
+                        data: "piloto_turno=" + document.getElementById("piloto_turno").value +"copiloto_turno=" + document.getElementById("copiloto_turno").value +"fecha_turno=" + document.getElementById("fecha_turno").value +"salida_turno=" + document.getElementById("salida_turno").value +"llegada_turno=" + document.getElementById("llegada_turno").value +"avion_turno=" + document.getElementById("avion_turno").value +"aclaracion_turno=" + document.getElementById("aclaracion_turno").value +"&largo0="+document.getElementById("largo0").value+"&pagina="+pagina,
                         success: function (res) {
-                            $('#datospagos').html(res);
+                            $('#datosturnospendientes').html(res);
+                            paginar(pagina);
+                        }
+                    });
+                    $.ajax({
+                        url: "app/Turno/AJAX/listadoTurnosConfirmados.php",
+                        type: 'POST',
+                        data: "piloto_turno=" + document.getElementById("piloto_turno").value +"copiloto_turno=" + document.getElementById("copiloto_turno").value +"fecha_turno=" + document.getElementById("fecha_turno").value +"salida_turno=" + document.getElementById("salida_turno").value +"llegada_turno=" + document.getElementById("llegada_turno").value +"avion_turno=" + document.getElementById("avion_turno").value +"aclaracion_turno=" + document.getElementById("aclaracion_turno").value +"&largo1="+document.getElementById("largo1").value+"&pagina="+pagina,
+                        success: function (res) {
+                            $('#datosturnosconfirmados').html(res);
+                            paginar(pagina);
+                        }
+                    });
+                    $.ajax({
+                        url: "app/Turno/AJAX/listadoTurnosCancelados.php",
+                        type: 'POST',
+                        data: "piloto_turno=" + document.getElementById("piloto_turno").value +"copiloto_turno=" + document.getElementById("copiloto_turno").value +"fecha_turno=" + document.getElementById("fecha_turno").value +"salida_turno=" + document.getElementById("salida_turno").value +"llegada_turno=" + document.getElementById("llegada_turno").value +"avion_turno=" + document.getElementById("avion_turno").value +"aclaracion_turno=" + document.getElementById("aclaracion_turno").value +"&largo2="+document.getElementById("largo2").value+"&pagina="+pagina,
+                        success: function (res) {
+                            $('#datosturnoscancelados').html(res);
                             paginar(pagina);
                         }
                     });

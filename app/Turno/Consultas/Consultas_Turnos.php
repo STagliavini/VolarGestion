@@ -85,7 +85,8 @@ class Consultas_Turnos{
                     $copiloto_turno = $_POST['copiloto_turno'];
                 }
                 if (isset($_POST['fecha_turno'])) {
-                    $fecha_turno = $_POST['fecha_turno'];
+                    $valores= explode("/", $_POST['fecha_turno']);
+                    $fecha_turno = $valores[2].'-'.$valores[1].'-'.$valores[0];
                 }
                 if (isset($_POST['salida_turno'])) {
                     $salida_turno = $_POST['salida_turno'];
@@ -146,7 +147,7 @@ class Consultas_Turnos{
                     $sql = $sql . "(aclaracion_turno like :aclaracion_turno)) ";
                 }
                 else{
-                    $sql = $sql . "(aclaracion_turno!='' or aclaracion_turno is not null)) ";
+                    $sql = $sql . "(aclaracion_turno!='' or aclaracion_turno is not null or aclaracion_turno is null)) ";
                 }
                 $sql=$sql."order by fecha_turno asc, salida_turno asc";
                 if(!isset($pagina)){
@@ -203,7 +204,8 @@ class Consultas_Turnos{
                     $copiloto_turno = $_POST['copiloto_turno'];
                 }
                 if (isset($_POST['fecha_turno'])) {
-                    $fecha_turno = $_POST['fecha_turno'];
+                    $valores= explode("/", $_POST['fecha_turno']);
+                    $fecha_turno = $valores[2].'-'.$valores[1].'-'.$valores[0];
                 }
                 if (isset($_POST['salida_turno'])) {
                     $salida_turno = $_POST['salida_turno'];
@@ -321,7 +323,8 @@ class Consultas_Turnos{
                     $copiloto_turno = $_POST['copiloto_turno'];
                 }
                 if (isset($_POST['fecha_turno'])) {
-                    $fecha_turno = $_POST['fecha_turno'];
+                    $valores= explode("/", $_POST['fecha_turno']);
+                    $fecha_turno = $valores[2].'-'.$valores[1].'-'.$valores[0];
                 }
                 if (isset($_POST['salida_turno'])) {
                     $salida_turno = $_POST['salida_turno'];
@@ -438,7 +441,8 @@ class Consultas_Turnos{
                     $copiloto_turno = $pam[1];
                 }
                 if (isset($pam[2])) {
-                    $fecha_turno = $pam[2];
+                    $valores= explode("/", $pam[2]);
+                    $fecha_turno = $valores[2].'-'.$valores[1].'-'.$valores[0];
                 }
                 if (isset($pam[3])) {
                     $salida_turno = $pam[3];
