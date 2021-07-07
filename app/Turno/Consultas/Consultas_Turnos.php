@@ -1,6 +1,18 @@
 <?php
 
 class Consultas_Turnos{
+    private static function corregirFecha($valores){
+        for($i=0;$i<count($valores);$i++){
+            if($i<2){
+                if($valores[$i]<10&&$valores[$i]>0){
+                    if(strpos($valores[$i],0)==false){
+                        $valores[$i]='0'.$valores[$i];
+                    }
+                }
+            }
+        }
+        return $valores;
+    }
     public static function insertar_turno($conexion, $turno) {
         $valores= explode("/", $turno->getFecha_turno());
         $id_turno = $turno->getId_turno();
@@ -86,7 +98,18 @@ class Consultas_Turnos{
                 }
                 if (isset($_POST['fecha_turno'])) {
                     $valores= explode("/", $_POST['fecha_turno']);
-                    $fecha_turno = $valores[2].'-'.$valores[1].'-'.$valores[0];
+                    if(count($valores)>1){
+                        if(count($valores)==2){
+                            if(isset($valores[1])){
+                                $valores=self::corregirFecha($valores);
+                                $fecha_turno = $valores[1].'-'.$valores[0];
+                            }
+                        }
+                        else{
+                            $valores=self::corregirFecha($valores);
+                            $fecha_turno = $valores[2].'-'.$valores[1].'-'.$valores[0];
+                        }
+                    }
                 }
                 if (isset($_POST['salida_turno'])) {
                     $salida_turno = $_POST['salida_turno'];
@@ -205,7 +228,18 @@ class Consultas_Turnos{
                 }
                 if (isset($_POST['fecha_turno'])) {
                     $valores= explode("/", $_POST['fecha_turno']);
-                    $fecha_turno = $valores[2].'-'.$valores[1].'-'.$valores[0];
+                    if(count($valores)>1){
+                        if(count($valores)==2){
+                            if(isset($valores[1])){
+                                $valores=self::corregirFecha($valores);
+                                $fecha_turno = $valores[1].'-'.$valores[0];
+                            }
+                        }
+                        else{
+                            $valores=self::corregirFecha($valores);
+                            $fecha_turno = $valores[2].'-'.$valores[1].'-'.$valores[0];
+                        }
+                    }
                 }
                 if (isset($_POST['salida_turno'])) {
                     $salida_turno = $_POST['salida_turno'];
@@ -324,7 +358,18 @@ class Consultas_Turnos{
                 }
                 if (isset($_POST['fecha_turno'])) {
                     $valores= explode("/", $_POST['fecha_turno']);
-                    $fecha_turno = $valores[2].'-'.$valores[1].'-'.$valores[0];
+                    if(count($valores)>1){
+                        if(count($valores)==2){
+                            if(isset($valores[1])){
+                                $valores=self::corregirFecha($valores);
+                                $fecha_turno = $valores[1].'-'.$valores[0];
+                            }
+                        }
+                        else{
+                            $valores=self::corregirFecha($valores);
+                            $fecha_turno = $valores[2].'-'.$valores[1].'-'.$valores[0];
+                        }
+                    }
                 }
                 if (isset($_POST['salida_turno'])) {
                     $salida_turno = $_POST['salida_turno'];
@@ -442,7 +487,18 @@ class Consultas_Turnos{
                 }
                 if (isset($pam[2])) {
                     $valores= explode("/", $pam[2]);
-                    $fecha_turno = $valores[2].'-'.$valores[1].'-'.$valores[0];
+                    if(count($valores)>1){
+                        if(count($valores)==2){
+                            if(isset($valores[1])){
+                                $valores=self::corregirFecha($valores);
+                                $fecha_turno = $valores[1].'-'.$valores[0];
+                            }
+                        }
+                        else{
+                            $valores=self::corregirFecha($valores);
+                            $fecha_turno = $valores[2].'-'.$valores[1].'-'.$valores[0];
+                        }
+                    }
                 }
                 if (isset($pam[3])) {
                     $salida_turno = $pam[3];

@@ -122,13 +122,36 @@ class Consultas_Vuelos {
             }
         }
     }
-
+    private static function corregirFecha($valores){
+        for($i=0;$i<count($valores);$i++){
+            if($i<2){
+                if($valores[$i]<10&&$valores[$i]>0){
+                    if(strpos($valores[$i],0)==false){
+                        $valores[$i]='0'.$valores[$i];
+                    }
+                }
+            }
+        }
+        return $valores;
+    }
     public static function listado($conexion) {
         $vuelos = array();
         if (isset($conexion)) {
             try {
                 if (isset($_POST['fecha_vuelo'])) {
-                    $fecha_vuelo = $_POST['fecha_vuelo'];
+                    $valores= explode("/", $_POST['fecha_vuelo']);
+                    if(count($valores)>1){
+                        if(count($valores)==2){
+                            if(isset($valores[1])){
+                                $valores=self::corregirFecha($valores);
+                                $fecha_vuelo = $valores[1].'-'.$valores[0];
+                            }
+                        }
+                        else{
+                            $valores=self::corregirFecha($valores);
+                            $fecha_vuelo = $valores[2].'-'.$valores[1].'-'.$valores[0];
+                        }
+                    }
                 }
                 if (isset($_POST['salida_vuelo'])) {
                     $salida_vuelo = $_POST['salida_vuelo'];
@@ -292,7 +315,19 @@ class Consultas_Vuelos {
         if (isset($conexion)) {
             try {
                 if (isset($pam[0])) {
-                    $fecha_vuelo = $pam[0];
+                    $valores= explode("/", $pam[0]);
+                    if(count($valores)>1){
+                        if(count($valores)==2){
+                            if(isset($valores[1])){
+                                $valores=self::corregirFecha($valores);
+                                $fecha_vuelo = $valores[1].'-'.$valores[0];
+                            }
+                        }
+                        else{
+                            $valores=self::corregirFecha($valores);
+                            $fecha_vuelo = $valores[2].'-'.$valores[1].'-'.$valores[0];
+                        }
+                    }
                 }
                 if (isset($pam[1])) {
                     $salida_vuelo = $pam[1];
