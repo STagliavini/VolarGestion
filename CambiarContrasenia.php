@@ -240,6 +240,35 @@
                                     <p>Pagos</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="Turno.php">
+                                    <i class="fas fa-bell"></i>
+                                    <p>Turno</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-toggle="collapse" href="#base">
+                                    <i class="fas fa-toolbox"></i>
+                                    <p>Mantenimiento</p>
+                                    <span class="caret"></span>
+                                </a>
+                                <div class="collapse" id="base">
+                                    <ul class="nav nav-collapse">
+                                        <li>
+                                            <a href="components/avatars.html">
+                                                <i class="fas fa-box"></i>
+                                                <p>Repuestos</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="components/buttons.html">
+                                                <i class="fas fa-file"></i>
+                                                <p>Categorias de Repuesto</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -269,6 +269,29 @@
                                     <p>Turno</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a data-toggle="collapse" href="#base">
+                                    <i class="fas fa-toolbox"></i>
+                                    <p>Mantenimiento</p>
+                                    <span class="caret"></span>
+                                </a>
+                                <div class="collapse" id="base">
+                                    <ul class="nav nav-collapse">
+                                        <li>
+                                            <a href="components/avatars.html">
+                                                <i class="fas fa-box"></i>
+                                                <p>Repuestos</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="components/buttons.html">
+                                                <i class="fas fa-file"></i>
+                                                <p>Categorias de Repuesto</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -316,10 +339,10 @@
                             </div><!-- col-md-6 -->
                         </div>
                         <div class="row" id="paginador">
-                            
+
                         </div>
                         <div class="row" id="pag">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -424,7 +447,7 @@
                     $.ajax({
                         url: "app/Paginador/Paginar.php",
                         type: 'POST',
-                        data: "matricula_avion=" + document.getElementById("matricula_avion").value + "&nombre_avion=" + document.getElementById("nombre_avion").value + "&descripcion_avion=" + document.getElementById("descripcion_avion").value + "&tipo_avion=" + document.getElementById("tipo_avion").value + "&metodo=Avion"+"&largo="+document.getElementById("largo").value+"&pag="+pagina,
+                        data: "matricula_avion=" + document.getElementById("matricula_avion").value + "&nombre_avion=" + document.getElementById("nombre_avion").value + "&descripcion_avion=" + document.getElementById("descripcion_avion").value + "&tipo_avion=" + document.getElementById("tipo_avion").value + "&metodo=Avion" + "&largo=" + document.getElementById("largo").value + "&pag=" + pagina,
                         success: function (res) {
                             $('#paginador').html(res);
                         }
@@ -434,7 +457,7 @@
                     $.ajax({
                         url: "app/Paginador/Paginar.php",
                         type: 'POST',
-                        data: "metodo=Avion"+"&largo="+document.getElementById("largo").value+"&pag="+pagina,
+                        data: "metodo=Avion" + "&largo=" + document.getElementById("largo").value + "&pag=" + pagina,
                         success: function (res) {
                             $('#paginador').html(res);
                         }
@@ -477,7 +500,7 @@
                     $.ajax({
                         url: "app/Avion/AJAX/listadoAviones.php",
                         type: 'POST',
-                        data: "pagina=" + pagina + "&matricula_avion=" + document.getElementById("matricula_avion").value + "&nombre_avion=" + document.getElementById("nombre_avion").value + "&descripcion_avion=" + document.getElementById("descripcion_avion").value + "&tipo_avion=" + document.getElementById("tipo_avion").value+"&largo="+document.getElementById("largo").value,
+                        data: "pagina=" + pagina + "&matricula_avion=" + document.getElementById("matricula_avion").value + "&nombre_avion=" + document.getElementById("nombre_avion").value + "&descripcion_avion=" + document.getElementById("descripcion_avion").value + "&tipo_avion=" + document.getElementById("tipo_avion").value + "&largo=" + document.getElementById("largo").value,
                         success: function (res) {
                             $('#datosaviones').html(res);
                             paginar(pagina);
@@ -488,7 +511,7 @@
                     $.ajax({
                         url: "app/Avion/AJAX/listadoAviones.php",
                         type: 'POST',
-                        data: "pagina=" + pagina+"&largo="+document.getElementById("largo").value,
+                        data: "pagina=" + pagina + "&largo=" + document.getElementById("largo").value,
                         success: function (res) {
                             $('#datosaviones').html(res);
                             paginar(pagina);
@@ -509,7 +532,7 @@
                     $.ajax({
                         url: "app/Avion/AJAX/listadoAviones.php",
                         type: 'POST',
-                        data: "pagina=" + pagina + "&matricula_avion=" + document.getElementById("matricula_avion").value + "&nombre_avion=" + document.getElementById("nombre_avion").value + "&descripcion_avion=" + document.getElementById("descripcion_avion").value + "&tipo_avion=" + document.getElementById("tipo_avion").value+"&largo="+document.getElementById("largo").value,
+                        data: "pagina=" + pagina + "&matricula_avion=" + document.getElementById("matricula_avion").value + "&nombre_avion=" + document.getElementById("nombre_avion").value + "&descripcion_avion=" + document.getElementById("descripcion_avion").value + "&tipo_avion=" + document.getElementById("tipo_avion").value + "&largo=" + document.getElementById("largo").value,
                         success: function (res) {
                             $('#datosaviones').html(res);
                             paginar(pagina);
@@ -520,7 +543,7 @@
                     $.ajax({
                         url: "app/Avion/AJAX/listadoAviones.php",
                         type: 'POST',
-                        data: "pagina=" + pagina+"&largo="+document.getElementById("largo").value,
+                        data: "pagina=" + pagina + "&largo=" + document.getElementById("largo").value,
                         success: function (res) {
                             $('#datosaviones').html(res);
                             paginar(pagina);
@@ -541,7 +564,7 @@
                     $.ajax({
                         url: "app/Avion/AJAX/listadoAviones.php",
                         type: 'POST',
-                        data: "pagina=" + pagina + "&matricula_avion=" + document.getElementById("matricula_avion").value + "&nombre_avion=" + document.getElementById("nombre_avion").value + "&descripcion_avion=" + document.getElementById("descripcion_avion").value + "&tipo_avion=" + document.getElementById("tipo_avion").value+"&largo="+document.getElementById("largo").value,
+                        data: "pagina=" + pagina + "&matricula_avion=" + document.getElementById("matricula_avion").value + "&nombre_avion=" + document.getElementById("nombre_avion").value + "&descripcion_avion=" + document.getElementById("descripcion_avion").value + "&tipo_avion=" + document.getElementById("tipo_avion").value + "&largo=" + document.getElementById("largo").value,
                         success: function (res) {
                             $('#datosaviones').html(res);
                             paginar(pagina);
@@ -552,7 +575,7 @@
                     $.ajax({
                         url: "app/Avion/AJAX/listadoAviones.php",
                         type: 'POST',
-                        data: "pagina=" + pagina+"&largo="+document.getElementById("largo").value,
+                        data: "pagina=" + pagina + "&largo=" + document.getElementById("largo").value,
                         success: function (res) {
                             $('#datosaviones').html(res);
                             paginar(pagina);
@@ -562,30 +585,30 @@
                 }
             }
             $('#largo').change(function () {
-        var modobusc = $('input[id="modbusc"]:checked').length;
-        if (modobusc > 0) {
-            $.ajax({
-                url: "app/Avion/AJAX/listadoAviones.php",
-                type: 'POST',
-                data: $('#formu').serialize()+"&largo="+document.getElementById("largo").value,
-                success: function (res) {
-                    $('#datosaviones').html(res);
-                }
-            });
-            paginar(0);
-        } else {
-            $.ajax({
+                var modobusc = $('input[id="modbusc"]:checked').length;
+                if (modobusc > 0) {
+                    $.ajax({
                         url: "app/Avion/AJAX/listadoAviones.php",
                         type: 'POST',
-                        data: "largo="+document.getElementById("largo").value,
+                        data: $('#formu').serialize() + "&largo=" + document.getElementById("largo").value,
+                        success: function (res) {
+                            $('#datosaviones').html(res);
+                        }
+                    });
+                    paginar(0);
+                } else {
+                    $.ajax({
+                        url: "app/Avion/AJAX/listadoAviones.php",
+                        type: 'POST',
+                        data: "largo=" + document.getElementById("largo").value,
                         success: function (res) {
                             $('#datosaviones').html(res);
                         }
                     });
                     paginar(0);
                     return false;
-        }
-    });
+                }
+            });
         </script>
     </body>
 </html>
