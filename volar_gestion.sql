@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-04-2021 a las 20:07:07
+-- Tiempo de generación: 12-10-2021 a las 21:32:50
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -99,7 +99,7 @@ CREATE TABLE `piloto` (
 
 INSERT INTO `piloto` (`id_piloto`, `dni_piloto`, `apellido_piloto`, `nombre_piloto`, `nacimiento_piloto`, `mail_piloto`, `deuda_piloto`) VALUES
 (24, 37312994, 'Ibañez', 'Santiago Javier', '1992-12-28', '', '-22952.74'),
-(25, 41362635, 'Tagliavini', 'Santiago Antonio', '1998-07-17', 'santi.tagliavini@gmail.com', '1280.58'),
+(25, 41362635, 'Tagliavini', 'Santiago Antonio', '1998-07-17', 'santi.tagliavini@gmail.com', '0.00'),
 (28, 32651750, 'Azar', 'Juan Ezequiel', '1990-09-28', '', '6280.58');
 
 -- --------------------------------------------------------
@@ -121,6 +121,41 @@ CREATE TABLE `tipo_avion` (
 INSERT INTO `tipo_avion` (`id_tipo_avion`, `nombre_tipo_avion`, `precio_tipo_avion`) VALUES
 (1, 'C152', '8972.25'),
 (2, 'C172', '12561.15');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `turno`
+--
+
+CREATE TABLE `turno` (
+  `id_turno` int(11) NOT NULL,
+  `piloto_turno` bigint(20) NOT NULL,
+  `copiloto_turno` bigint(20) NOT NULL,
+  `fecha_turno` date NOT NULL,
+  `salida_turno` time NOT NULL,
+  `llegada_turno` time NOT NULL,
+  `avion_turno` varchar(7) NOT NULL,
+  `aclaracion_turno` varchar(200) DEFAULT NULL,
+  `estado_turno` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `turno`
+--
+
+INSERT INTO `turno` (`id_turno`, `piloto_turno`, `copiloto_turno`, `fecha_turno`, `salida_turno`, `llegada_turno`, `avion_turno`, `aclaracion_turno`, `estado_turno`) VALUES
+(6, 32651750, 37312994, '2021-04-28', '15:53:00', '16:00:00', 'LV-FWQ', '', 2),
+(10, 32651750, 41362635, '2021-04-28', '15:53:00', '16:00:00', 'LV-FWP', '', 2),
+(7, 32651750, 41362635, '2021-07-07', '15:53:00', '17:00:00', 'LV-FWQ', '', 2),
+(3, 37312994, 32651750, '2021-04-28', '15:53:00', '16:00:00', 'LV-FWQ', 'hola', 2),
+(12, 37312994, 32651750, '2021-04-30', '15:53:00', '16:00:00', 'LV-FWQ', '', 2),
+(13, 37312994, 37312994, '2021-04-21', '15:53:00', '16:00:00', 'LV-FWQ', '', 2),
+(9, 37312994, 37312994, '2021-04-28', '15:53:00', '16:00:00', 'LV-FEB', '', 2),
+(4, 37312994, 37312994, '2021-04-28', '15:53:00', '16:00:00', 'LV-FWP', '', 2),
+(0, 37312994, 37312994, '2021-04-28', '15:53:00', '16:00:00', 'LV-FWQ', 'hola', 2),
+(11, 37312994, 41362635, '2021-04-29', '15:53:00', '16:00:00', 'LV-FWP', '', 2),
+(5, 41362635, 37312994, '2021-07-05', '19:30:00', '20:00:00', 'LV-FWQ', '', 2);
 
 -- --------------------------------------------------------
 
@@ -244,6 +279,13 @@ ALTER TABLE `tipo_avion`
   ADD UNIQUE KEY `nombre_tipo_avion` (`nombre_tipo_avion`);
 
 --
+-- Indices de la tabla `turno`
+--
+ALTER TABLE `turno`
+  ADD PRIMARY KEY (`piloto_turno`,`copiloto_turno`,`fecha_turno`,`salida_turno`,`avion_turno`),
+  ADD UNIQUE KEY `id_turno` (`id_turno`);
+
+--
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -286,6 +328,12 @@ ALTER TABLE `piloto`
 --
 ALTER TABLE `tipo_avion`
   MODIFY `id_tipo_avion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `turno`
+--
+ALTER TABLE `turno`
+  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
