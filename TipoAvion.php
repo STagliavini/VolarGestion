@@ -258,13 +258,13 @@
                                 <div class="collapse" id="base">
                                     <ul class="nav nav-collapse">
                                         <li>
-                                            <a href="components/avatars.html">
+                                            <a href="Repuesto.php">
                                                 <i class="fas fa-box"></i>
                                                 <p>Repuestos</p>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="components/buttons.html">
+                                            <a href="CategoriaRepuesto.php">
                                                 <i class="fas fa-file"></i>
                                                 <p>Categorias de Repuesto</p>
                                             </a>
