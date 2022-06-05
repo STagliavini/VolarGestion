@@ -245,7 +245,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="Turno.php">
-                                    <i class="fas fa-money-bill"></i>
+                                    <i class="fas fa-bell"></i>
                                     <p>Turnos</p>
                                 </a>
                             </li>
